@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>TELC Deutsch Test</title>
+</head>
+<body>
+
+<h1>TELC Deutsch – Test</h1>
+
+<p>1. Ich ___ aus Marokko.</p>
+
+<button onclick="check(true)">bin</button>
+<button onclick="check(false)">bist</button>
+<button onclick="check(false)">ist</button>
+
+<p id="result"></p>
+
+<script>
+function check(correct) {
+  document.getElementById("result").innerHTML =
+    correct ? "✅ Richtig!" : "❌ Falsch!";
+}
+</script>
+
+</body>
+</html>
