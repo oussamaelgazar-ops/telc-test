@@ -1,14 +1,294 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Sprachbausteine 2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprachbausteine Teil 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f2f4f7;
+            color: #333;
+            line-height: 1.5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            background-color: #0056a6;
+            color: white;
+            padding: 25px 30px;
+            border-bottom: 5px solid #f8c300;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .logo span {
+            color: #f8c300;
+        }
+        
+        .exam-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .exam-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        .section-icon {
+            background-color: #0056a6;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .section-title {
+            font-size: 26px;
+            color: #0056a6;
+            font-weight: 700;
+        }
+        
+        .topics-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .topic-button {
+            background-color: #f0f5ff;
+            border: 2px solid #d0ddec;
+            border-radius: 10px;
+            padding: 20px 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #0056a6;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70px;
+        }
+        
+        .topic-button:hover {
+            background-color: #e1e9ff;
+            border-color: #0056a6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 86, 166, 0.1);
+        }
+        
+        .topic-button.active {
+            background-color: #0056a6;
+            color: white;
+            border-color: #0056a6;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .topics-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .topics-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .exam-title {
+                font-size: 26px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            .topic-button {
+                padding: 18px 10px;
+                font-size: 15px;
+                min-height: 65px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div>
+                    <div class="logo">Prüfungs<span>Portal</span></div>
+                    <h1 class="exam-title">Sprachbausteine Teil 2</h1>
+                    <p class="exam-subtitle">Prüfungsvorbereitung - Sprachbausteine</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="section-header">
+                <div class="section-icon">SB2</div>
+                <h2 class="section-title">Themen für die Prüfung</h2>
+            </div>
+            
+            <div class="topics-container" id="topicsContainer">
+                <!-- Themen werden per JavaScript geladen -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p></p>
+        </div>
+    </div>
 
-<h1>Sprachbausteine Teil 2</h1>
-<p>تمارين Sprachbausteine 2 هنا</p>
-
-<a href="index.html">رجوع للصفحة الرئيسية</a>
-
+    <script>
+        // Themenliste für Sprachbausteine Teil 2 - 3 Spalten
+        const topics = [
+            // Erste Spalte
+            "Theater für Kinder und Jugendliche",
+            "Haustieren",
+            "Ausbildung",
+            "Manipulierte Bilder",
+            "Handschrift",
+            "Obst und Gemüse",
+            "BIO",
+            "Joggen",
+            "Online—Sprachkurse",
+            "Schönschrift",
+            
+            // Zweite Spalte
+            "Im Restaurant",
+            "Liebesgrüße aus der Kühltruhe",
+            "Skipiste",
+            "Haustieren",
+            "Schulweg",
+            "TV-Bilder",
+            "Erfolg",
+            "Maßgeschneidert",
+            "Fische",
+            "Kaffee und Kuchen",
+            
+            // Dritte Spalte
+            "Das Fahrrad: ernsthafte Konkurrenz fürs Auto?",
+            "Braunbären",
+            "Jugend diskutiert",
+            "Schwarzarbeit",
+            "Höflichkeit",
+            "Freund des Menschen",
+            "Deutschland",
+            "Der Hund",
+            "Man(n) kocht selbst"
+        ];
+        
+        // App-Zustand
+        let currentTopic = null;
+        
+        // DOM-Elemente
+        const topicsContainer = document.getElementById('topicsContainer');
+        
+        // Themen-Buttons erstellen
+        function createTopicButtons() {
+            topics.forEach(topic => {
+                const button = document.createElement('button');
+                button.className = 'topic-button';
+                button.textContent = topic;
+                button.dataset.topic = topic;
+                
+                button.addEventListener('click', () => {
+                    // Aktiven Zustand entfernen
+                    document.querySelectorAll('.topic-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Aktiven Zustand setzen
+                    button.classList.add('active');
+                    currentTopic = topic;
+                    
+                    // Thema im Konsole anzeigen
+                    console.log(`Ausgewähltes Thema (Sprachbausteine Teil 2): ${topic}`);
+                });
+                
+                topicsContainer.appendChild(button);
+            });
+        }
+        
+        // Initialisierung
+        function init() {
+            createTopicButtons();
+            
+            // Erstes Thema standardmäßig auswählen
+            if (topics.length > 0) {
+                const firstTopicButton = topicsContainer.querySelector('.topic-button');
+                firstTopicButton.click();
+            }
+        }
+        
+        // App starten
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
