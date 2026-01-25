@@ -1,14 +1,671 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Lesen Teil 1 – Umwelt</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELC B2 Lesen Teil 1 - Umwelt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2c6fb7;
+        }
+        
+        h1 {
+            color: #2c6fb7;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .instructions {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 16px;
+        }
+        
+        .instructions p {
+            margin-bottom: 10px;
+        }
+        
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .texts-section {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .headings-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .headings-section h2 {
+            color: #2c6fb7;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .headings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .heading-item {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .heading-item:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .heading-item.selected {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .heading-item.used {
+            opacity: 0.5;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        
+        .heading-letter {
+            display: inline-block;
+            background-color: #2c6fb7;
+            color: white;
+            width: 26px;
+            height: 26px;
+            text-align: center;
+            line-height: 26px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .text-box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .text-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .text-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c6fb7;
+        }
+        
+        .selected-heading-display {
+            background-color: #e8f0fe;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c6fb7;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .text-content {
+            line-height: 1.6;
+            text-align: justify;
+            font-size: 16px;
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 180px;
+        }
+        
+        #submitButton {
+            background-color: #2c6fb7;
+            color: white;
+        }
+        
+        #submitButton:hover {
+            background-color: #1a5ca8;
+        }
+        
+        #resetButton {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #resetButton:hover {
+            background-color: #5a6268;
+        }
+        
+        #homeButton {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        #homeButton:hover {
+            background-color: #218838;
+        }
+        
+        .feedback-container {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .feedback-container h3 {
+            color: #2c6fb7;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .feedback-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .feedback-correct {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .feedback-incorrect {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #2c6fb7;
+        }
+        
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .text-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .selected-heading-display {
+                width: 100%;
+            }
+        }
+        
+        .remove-heading {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .selected-heading-display:hover .remove-heading {
+            display: flex;
+        }
+        
+        .empty-message {
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-  <h1>Lesen Teil 1 – Umwelt</h1>
+    <div class="header">
+        <h1>Lesen Teil 1 - Umwelt</h1>
+        <p>Ordnen Sie die Überschriften A-J den Texten 1-5 zu</p>
+    </div>
+    
+    <div class="instructions">
+        <p><strong>Anleitung:</strong> Lesen Sie die fünf Texte und die zehn Überschriften. Wählen Sie für jeden Text die passende Überschrift aus. Jede Überschrift kann nur einmal verwendet werden. Klicken Sie auf eine Überschrift, um sie einem Text zuzuordnen.</p>
+        <p><strong>Korrekte Antworten:</strong> Text 1 → C, Text 2 → I, Text 3 → F, Text 4 → A, Text 5 → J</p>
+    </div>
+    
+    <div class="content-container">
+        <div class="texts-section">
+            <!-- Text 1 -->
+            <div class="text-box" id="text1">
+                <div class="text-header">
+                    <div class="text-number">Text 1</div>
+                    <div class="selected-heading-display" id="display1">
+                        <span class="empty-message">Noch keine Überschrift ausgewählt</span>
+                        <button class="remove-heading" onclick="removeHeading(1)">×</button>
+                    </div>
+                </div>
+                <div class="text-content">
+                    Sie sind eine gut funktionierende Gemeinschaft mit einer Vision: Schon seit den 80er Jahren leben Mitglieder des „Tauschrings Harmelsdorf e.V; vor, wie man nachhaltig mit Ressourcen umgehen kann und dadurch die Umwelt schont, Tauschen, nicht wegwerfen ist das Motto dieser Initiative - die damals als eine der ersten dieser Art in Deutschland noch belächelt wurde, heute aber viel Lob und Anerkennung bekommt. Ob Küchengeräte, Bücher oder auch Kleidungsstücke, die man nicht mehr anzieht: Was ungenutzt, findet bei jemandem Verwendung, der noch etwas damit anfangen kann. Getauscht werden nicht nur Güter, sondern auch Dienstleistungen. Eine der Voraussetzungen für das Gelingen: „Die Dienstleistungen dürfen nicht in Konkurrenz zum Handwerk stehen", erklärt Tauschring- Mitglied Kati Jago. Besonders gefragt seien Fahrdienste, etwa zum Arzt. Ihre monatlichen Zusammenkünfte an der Rathausstraße sind für die derzeit 30 Vereinsmitglieder viel mehr als bloße Tauschtreffs: „Man darf den Faktor Mensch nicht unterschätzen", sagt Kati Jago. Denn beim Tauschen zählte auch das soziale Miteinander.
+                </div>
+            </div>
+            
+            <!-- Text 2 -->
+            <div class="text-box" id="text2">
+                <div class="text-header">
+                    <div class="text-number">Text 2</div>
+                    <div class="selected-heading-display" id="display2">
+                        <span class="empty-message">Noch keine Überschrift ausgewählt</span>
+                        <button class="remove-heading" onclick="removeHeading(2)">×</button>
+                    </div>
+                </div>
+                <div class="text-content">
+                    Man gönnt sich ja sonst nicht. Und schon ist die Einkaufstüte voll und das Konto leer. Macht das glücklich? Oder wieso sonst kauft man mehr, als man eigentlich geplant hat? Ein Einkauf kann sich ähnlich anfühlen wie eine Belohnung, sagt der Psychologe Daniel Stüber. Denn dabei würden Glückshormone ausgeschüttet. Manchmal könne das sogar in einem Kaufrausch enden. Denn das Glücksgefühl, das Konsumenten beim Kaufen erleben, könne sie dazu anregen, immer mehr Geld auszugeben. Doch die Ernüchterung folge oft schnell, warnt er: Denn wer später merke, wie teuer das alles gewesen sei, schütte Stresshormone aus. Dies könne zu Schlafstörungen und schlechter Laune führen. Langfristig lässt sich so die eigene Lebenszufriedenheit also nicht steigern.
+                </div>
+            </div>
+            
+            <!-- Text 3 -->
+            <div class="text-box" id="text3">
+                <div class="text-header">
+                    <div class="text-number">Text 3</div>
+                    <div class="selected-heading-display" id="display3">
+                        <span class="empty-message">Noch keine Überschrift ausgewählt</span>
+                        <button class="remove-heading" onclick="removeHeading(3)">×</button>
+                    </div>
+                </div>
+                <div class="text-content">
+                    Geklickt, gekauft, zurückgeschickt: Kunden nutzen im Online-Handel gerne die Möglichkeit, Waren innerhalb einer bestimmten Frist kostenlos zurückzusenden. Vor allem im Modehandel steigt die Zahl der Rücksendungen immer weiter an. Oft bestellen Kunden gleich mehrere Modelle in unterschiedlichen Größen, um sie zu Hause in Ruhe anzuprobieren. Die Kosten für die Retouren trägt der Anbieter. Dennoch lohnt sich für die Online-Händler das Geschäft. Die zurückgegebene Kleidung kann zum Beispiel oft so aufbereitet werden, dass sie erneut zum Verkauf angeboten werden kann. Rücksendungen werden sich im Online-Handel nie ganz vermeiden lassen, erklärt Birgit Steinköhler vom Bundesverband Online-Handel. Dennoch ist es möglich, dass sich ihre Anzahl in Zukunft senken lässt. Dies wünschen sich natürlich auch die Online-Verkäufer und suchen nach neuen Möglichkeiten: etwa detailliertere Produktinformationen oder neue Technologien, die die individuellen Maße der Kunden ermitteln. Dennoch: Rücksendungen werden im Online-Handel wohl immer zum Geschäftsmodell gehören.
+                </div>
+            </div>
+            
+            <!-- Text 4 -->
+            <div class="text-box" id="text4">
+                <div class="text-header">
+                    <div class="text-number">Text 4</div>
+                    <div class="selected-heading-display" id="display4">
+                        <span class="empty-message">Noch keine Überschrift ausgewählt</span>
+                        <button class="remove-heading" onclick="removeHeading(4)">×</button>
+                    </div>
+                </div>
+                <div class="text-content">
+                    Keine Lust mehr auf die Konsum-Gesellschaft? Dann könnte es ein erster Schritt sein, den Lieblingspulli zu stopfen statt zu entsorgen oder den alten Wecker von Oma noch mal zum Laufen zu bringen. Ob Fahrrad, Fernseher oder Smartphone – man muss bei Defekten nicht gleich alles wegwerfen. In sogenannten Repair-Cafés können defekte Gegenstände unter fachkundiger Anleitung wieder instandgesetzt werden. „Damit schonen wir die Umwelt und den Geldbeutel“, erklärt Thomas Rederitz, Inhaber eines solchen Reparaturcafés. Repair-Cafés verstehen sich als Initiative gegen die Wegwerfmentalität. Da viele Firmen keinen Reparaturservice mehr anbieten, muss vieles aufwendig entsorgt werden, sagt Rederitz. Dass dies nicht immer nötig sei, zeige die Praxis. Manchmal sei ja auch nur eine Schraube locker oder es fehle ein kleines Bauteil, das leicht ersetzt werden könne. „Im Reparaturcafé wird gemeinsam gewerkelt, geschraubt, genäht, gebastelt – und auch gelacht und geredet.“ Die Reparatur werde in jedem Fall sachgerecht durchgeführt; denn zu den freiwilligen Mitarbeitern von Repair-Cafés gehörten Handwerksmeister der unterschiedlichsten Fachrichtungen.
+                </div>
+            </div>
+            
+            <!-- Text 5 -->
+            <div class="text-box" id="text5">
+                <div class="text-header">
+                    <div class="text-number">Text 5</div>
+                    <div class="selected-heading-display" id="display5">
+                        <span class="empty-message">Noch keine Überschrift ausgewählt</span>
+                        <button class="remove-heading" onclick="removeHeading(5)">×</button>
+                    </div>
+                </div>
+                <div class="text-content">
+                    Viele Menschen sind erstaunlich großzügig: Sie machen anderen gern Geschenke, spenden Geld für gute Zwecke oder opfern Zeit für ehrenamtliche Tätigkeiten. Aber was motiviert sie dazu? Die Wissenschaft liefert ganz unterschiedliche Erklärungsansätze. Eine Erklärung lautet, dass großzügige Menschen auf Gegenseitigkeit hoffen: Wer viel gibt, bekommt auch viel zurück. Eine Studie konnte nun aber zeigen, dass die Antwort vielleicht ganz einfach ist: Großzügigkeit macht glücklich. Dies fanden Forscher der Universität Lübeck heraus. Diese enge Verknüpfung zwischen großzügigem Verhalten und Glücksgefühl zeige sich auch im Gehirn. So aktiviere ein solches Verhalten ein Hirnareal, das eng mit unserem Belohnungszentrum verknüpft sei. Das Ergebnis ihrer Studie könne weitreichende Folgen für die Gesellschaft haben. Wer glücklicher werden möchte, könne sich diese neuen Erkenntnisse zunutze machen: Denn wer für andere da ist, tut auch etwas für das eigene Wohlbefinden.
+                </div>
+            </div>
+        </div>
+        
+        <div class="headings-section">
+            <h2>Überschriften A-J</h2>
+            <div class="headings-list" id="headingsList">
+                <!-- Headings will be added by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="buttons-container">
+        <button id="submitButton">Abschicken</button>
+        <button id="resetButton">Zurücksetzen</button>
+        <button id="homeButton">Zurück zur Startseite</button>
+    </div>
+    
+    <div class="feedback-container" id="feedbackContainer">
+        <h3>Ihre Ergebnisse</h3>
+        <div id="feedbackResults"></div>
+        <div class="score-display" id="scoreDisplay"></div>
+    </div>
 
-  <p>Lesen Sie die Texte und wählen Sie die richtige Antwort.</p>
-
-  <!-- هنا دير الأسئلة ديالك -->
+    <script>
+        // البيانات: النصوص والعناوين
+        const correctAnswers = {
+            'text1': 'C',
+            'text2': 'I',
+            'text3': 'F',
+            'text4': 'A',
+            'text5': 'J'
+        };
+        
+        const headings = [
+            {letter: 'A', text: 'Gemeinsam kaputte Geräte retten'},
+            {letter: 'B', text: 'Kaufsucht überwinden – diese Möglichkeiten gibt es'},
+            {letter: 'C', text: 'Neuer Besitzer für nicht mehr gebrauchte Gegenstände'},
+            {letter: 'D', text: 'Reparatur alter Haushaltsgeräte lohnt sich oft nicht'},
+            {letter: 'E', text: 'Rücksendungen verderben Online-Händler das Geschäft'},
+            {letter: 'F', text: 'Rücksendungen verringern: Händler hoffen auf Lösungen'},
+            {letter: 'G', text: 'Studie zeigt, welche Geschenke glücklich machen'},
+            {letter: 'H', text: 'Verein mit Preis für Umweltschutz ausgezeichnet'},
+            {letter: 'I', text: 'Volle Einkaufstüten machen nur kurze Zeit Freude'},
+            {letter: 'J', text: 'Wer Engagement zeigt, steigert sein Glücksgefühl'}
+        ];
+        
+        // متغيرات التتبع
+        let selectedHeadings = {};
+        let usedHeadings = new Set();
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // إنشاء قائمة العناوين
+            const headingsList = document.getElementById('headingsList');
+            headings.forEach(heading => {
+                const headingElement = document.createElement('div');
+                headingElement.className = 'heading-item';
+                headingElement.id = `heading-${heading.letter}`;
+                headingElement.innerHTML = `
+                    <span class="heading-letter">${heading.letter}</span>
+                    <span class="heading-text">${heading.text}</span>
+                `;
+                
+                // إضافة حدث النقر
+                headingElement.addEventListener('click', function() {
+                    if (!headingElement.classList.contains('used')) {
+                        openHeadingSelection(heading.letter, heading.text);
+                    }
+                });
+                
+                headingsList.appendChild(headingElement);
+            });
+            
+            // أحداث الأزرار
+            document.getElementById('submitButton').addEventListener('click', checkAnswers);
+            document.getElementById('resetButton').addEventListener('click', resetSelections);
+            document.getElementById('homeButton').addEventListener('click', function() {
+                alert("Zurück zur Startseite - In einer echten Anwendung würde dies zur Hauptseite navigieren.");
+            });
+            
+            // تهيئة العروض
+            for (let i = 1; i <= 5; i++) {
+                updateTextDisplay(i);
+            }
+        });
+        
+        // فتح نافذة اختيار النص للعنوان
+        function openHeadingSelection(headingLetter, headingText) {
+            // إنشاء نافذة اختيار النص
+            const selectionDiv = document.createElement('div');
+            selectionDiv.style.position = 'fixed';
+            selectionDiv.style.top = '0';
+            selectionDiv.style.left = '0';
+            selectionDiv.style.width = '100%';
+            selectionDiv.style.height = '100%';
+            selectionDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            selectionDiv.style.display = 'flex';
+            selectionDiv.style.justifyContent = 'center';
+            selectionDiv.style.alignItems = 'center';
+            selectionDiv.style.zIndex = '1000';
+            selectionDiv.id = 'selectionModal';
+            
+            selectionDiv.innerHTML = `
+                <div style="background: white; padding: 30px; border-radius: 10px; max-width: 500px; width: 90%;">
+                    <h3 style="margin-bottom: 20px; color: #2c6fb7;">Überschrift ${headingLetter} zuordnen</h3>
+                    <p style="margin-bottom: 20px; font-weight: bold;">${headingText}</p>
+                    <p style="margin-bottom: 25px;">Wählen Sie den passenden Text:</p>
+                    <div id="textOptions" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+                        ${[1,2,3,4,5].map(i => `
+                            <button onclick="assignHeadingToText(${i}, '${headingLetter}', '${headingText}')" 
+                                    style="padding: 12px; background: ${selectedHeadings[i] ? '#f8f9fa' : '#e8f0fe'}; 
+                                           border: 1px solid #ddd; border-radius: 5px; cursor: pointer; text-align: left;">
+                                <strong>Text ${i}</strong>
+                                ${selectedHeadings[i] ? `<br><small>Bereits zugeordnet: ${selectedHeadings[i].letter}</small>` : ''}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <button onclick="closeSelectionModal()" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Abbrechen
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(selectionDiv);
+        }
+        
+        // إغلاق نافذة الاختيار
+        function closeSelectionModal() {
+            const modal = document.getElementById('selectionModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // تعيين العنوان للنص
+        function assignHeadingToText(textNumber, headingLetter, headingText) {
+            // إذا كان النص لديه بالفعل عنوان، قم بإزالته أولاً
+            if (selectedHeadings[textNumber]) {
+                const oldHeading = selectedHeadings[textNumber].letter;
+                usedHeadings.delete(oldHeading);
+                document.getElementById(`heading-${oldHeading}`).classList.remove('used');
+            }
+            
+            // تعيين العنوان الجديد
+            selectedHeadings[textNumber] = {
+                letter: headingLetter,
+                text: headingText
+            };
+            
+            // تحديث مجموعة العناوين المستخدمة
+            usedHeadings.add(headingLetter);
+            
+            // تحديث العروض
+            updateTextDisplay(textNumber);
+            updateHeadingDisplay(headingLetter);
+            
+            // إغلاق نافذة الاختيار
+            closeSelectionModal();
+        }
+        
+        // إزالة العنوان من النص
+        function removeHeading(textNumber) {
+            if (selectedHeadings[textNumber]) {
+                const headingLetter = selectedHeadings[textNumber].letter;
+                
+                // إزالة من التتبع
+                delete selectedHeadings[textNumber];
+                usedHeadings.delete(headingLetter);
+                
+                // تحديث العروض
+                updateTextDisplay(textNumber);
+                updateHeadingDisplay(headingLetter);
+            }
+        }
+        
+        // تحديث عرض النص
+        function updateTextDisplay(textNumber) {
+            const displayElement = document.getElementById(`display${textNumber}`);
+            const heading = selectedHeadings[textNumber];
+            
+            if (heading) {
+                displayElement.innerHTML = `
+                    <span><strong>${heading.letter}. ${heading.text}</strong></span>
+                    <button class="remove-heading" onclick="removeHeading(${textNumber})">×</button>
+                `;
+                displayElement.classList.remove('empty');
+            } else {
+                displayElement.innerHTML = `
+                    <span class="empty-message">Noch keine Überschrift ausgewählt</span>
+                    <button class="remove-heading" onclick="removeHeading(${textNumber})" style="display: none;">×</button>
+                `;
+            }
+        }
+        
+        // تحديث عرض العنوان
+        function updateHeadingDisplay(headingLetter) {
+            const headingElement = document.getElementById(`heading-${headingLetter}`);
+            
+            if (usedHeadings.has(headingLetter)) {
+                headingElement.classList.add('used');
+                headingElement.classList.remove('selected');
+            } else {
+                headingElement.classList.remove('used', 'selected');
+            }
+        }
+        
+        // التحقق من الإجابات
+        function checkAnswers() {
+            let correctCount = 0;
+            const feedbackResults = document.getElementById('feedbackResults');
+            feedbackResults.innerHTML = '';
+            
+            // التحقق من كل نص
+            for (let i = 1; i <= 5; i++) {
+                const userAnswer = selectedHeadings[i] ? selectedHeadings[i].letter : '';
+                const correctAnswer = correctAnswers[`text${i}`];
+                const isCorrect = userAnswer === correctAnswer;
+                
+                if (isCorrect) correctCount++;
+                
+                // إنشاء عنصر النتيجة
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `feedback-item ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
+                
+                if (userAnswer) {
+                    resultDiv.innerHTML = `
+                        <div>
+                            <strong>Text ${i}:</strong> Ihre Antwort: ${userAnswer}
+                        </div>
+                        <div>
+                            ${isCorrect ? 
+                                '✓ Richtig' : 
+                                `✗ Falsch (Richtig: ${correctAnswer})`}
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div>
+                            <strong>Text ${i}:</strong> Keine Antwort ausgewählt
+                        </div>
+                        <div>
+                            ✗ Falsch (Richtig: ${correctAnswer})
+                        </div>
+                    `;
+                }
+                
+                feedbackResults.appendChild(resultDiv);
+            }
+            
+            // عرض النتيجة
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const percentage = Math.round((correctCount / 5) * 100);
+            scoreDisplay.textContent = `Ergebnis: ${correctCount} von 5 richtig (${percentage}%)`;
+            
+            // إظهار حاوية النتائج
+            document.getElementById('feedbackContainer').style.display = 'block';
+            
+            // التمرير إلى النتائج
+            document.getElementById('feedbackContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // إعادة تعيين كل شيء
+        function resetSelections() {
+            selectedHeadings = {};
+            usedHeadings.clear();
+            
+            // إعادة تعيين عروض النصوص
+            for (let i = 1; i <= 5; i++) {
+                updateTextDisplay(i);
+            }
+            
+            // إعادة تعيين عروض العناوين
+            headings.forEach(heading => {
+                const headingElement = document.getElementById(`heading-${heading.letter}`);
+                headingElement.classList.remove('used', 'selected');
+            });
+            
+            // إخفاء النتائج
+            document.getElementById('feedbackContainer').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
