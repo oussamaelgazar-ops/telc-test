@@ -202,8 +202,17 @@
             background-color: white;
             padding: 15px;
             border-radius: 5px;
-            border-left: 4px solid #2c6fb7;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .answer-content.correct {
+            border-left: 4px solid #28a745;
+            background-color: #f8fff9;
+        }
+        
+        .answer-content.incorrect {
+            border-left: 4px solid #dc3545;
+            background-color: #fff8f8;
         }
         
         .remove-answer {
@@ -273,54 +282,6 @@
             background-color: #5a6268;
         }
         
-        .feedback-container {
-            margin-top: 40px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: none;
-            border-top: 5px solid #2c6fb7;
-        }
-        
-        .feedback-container h3 {
-            color: #2c6fb7;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 24px;
-        }
-        
-        .feedback-item {
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 16px;
-        }
-        
-        .feedback-correct {
-            background-color: #d4edda;
-            border-left: 5px solid #28a745;
-        }
-        
-        .feedback-incorrect {
-            background-color: #f8d7da;
-            border-left: 5px solid #dc3545;
-        }
-        
-        .score-display {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 25px;
-            color: #2c6fb7;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-        }
-        
         @media (max-width: 1024px) {
             .content-container {
                 flex-direction: column;
@@ -372,6 +333,41 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
+        
+        .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 5px;
+            background-color: #f8fff9;
+            border-radius: 4px;
+            border-left: 3px solid #28a745;
+        }
+        
+        .answer-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 15px;
+            display: none;
+        }
+        
+        .correct-feedback {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        
+        .incorrect-feedback {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .correct-answer-text {
+            color: #28a745;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -397,6 +393,7 @@
                     <div class="text-content">
                         Sie sind eine gut funktionierende Gemeinschaft mit einer Vision: Schon seit den 80er Jahren leben Mitglieder des „Tauschrings Harmelsdorf e.V; vor, wie man nachhaltig mit Ressourcen umgehen kann und dadurch die Umwelt schont, Tauschen, nicht wegwerfen ist das Motto dieser Initiative - die damals als eine der ersten dieser Art in Deutschland noch belächelt wurde, heute aber viel Lob und Anerkennung bekommt. Ob Küchengeräte, Bücher oder auch Kleidungsstücke, die man nicht mehr anzieht: Was ungenutzt, findet bei jemandem Verwendung, der noch etwas damit anfangen kann. Getauscht werden nicht nur Güter, sondern auch Dienstleistungen. Eine der Voraussetzungen für das Gelingen: „Die Dienstleistungen dürfen nicht in Konkurrenz zum Handwerk stehen", erklärt Tauschring- Mitglied Kati Jago. Besonders gefragt seien Fahrdienste, etwa zum Arzt. Ihre monatlichen Zusammenkünfte an der Rathausstraße sind für die derzeit 30 Vereinsmitglieder viel mehr als bloße Tauschtreffs: „Man darf den Faktor Mensch nicht unterschätzen", sagt Kati Jago. Denn beim Tauschen zählte auch das soziale Miteinander.
                     </div>
+                    <div class="answer-feedback" id="feedback1"></div>
                 </div>
                 
                 <!-- Text 2 -->
@@ -408,6 +405,7 @@
                     <div class="text-content">
                         Man gönnt sich ja sonst nicht. Und schon ist die Einkaufstüte voll und das Konto leer. Macht das glücklich? Oder wieso sonst kauft man mehr, als man eigentlich geplant hat? Ein Einkauf kann sich ähnlich anfühlen wie eine Belohnung, sagt der Psychologe Daniel Stüber. Denn dabei würden Glückshormone ausgeschüttet. Manchmal könne das sogar in einem Kaufrausch enden. Denn das Glücksgefühl, das Konsumenten beim Kaufen erleben, könne sie dazu anregen, immer mehr Geld auszugeben. Doch die Ernüchterung folge oft schnell, warnt er: Denn wer später merke, wie teuer das alles gewesen sei, schütte Stresshormone aus. Dies könne zu Schlafstörungen und schlechter Laune führen. Langfristig lässt sich so die eigene Lebenszufriedenheit also nicht steigern.
                     </div>
+                    <div class="answer-feedback" id="feedback2"></div>
                 </div>
                 
                 <!-- Text 3 -->
@@ -419,6 +417,7 @@
                     <div class="text-content">
                         Geklickt, gekauft, zurückgeschickt: Kunden nutzen im Online-Handel gerne die Möglichkeit, Waren innerhalb einer bestimmten Frist kostenlos zurückzusenden. Vor allem im Modehandel steigt die Zahl der Rücksendungen immer weiter an. Oft bestellen Kunden gleich mehrere Modelle in unterschiedlichen Größen, um sie zu Hause in Ruhe anzuprobieren. Die Kosten für die Retouren trägt der Anbieter. Dennoch lohnt sich für die Online-Händler das Geschäft. Die zurückgegebene Kleidung kann zum Beispiel oft so aufbereitet werden, dass sie erneut zum Verkauf angeboten werden kann. Rücksendungen werden sich im Online-Handel nie ganz vermeiden lassen, erklärt Birgit Steinköhler vom Bundesverband Online-Handel. Dennoch ist es möglich, dass sich ihre Anzahl in Zukunft senken lässt. Dies wünschen sich natürlich auch die Online-Verkäufer und suchen nach neuen Möglichkeiten: etwa detailliertere Produktinformationen oder neue Technologien, die die individuellen Maße der Kunden ermitteln. Dennoch: Rücksendungen werden im Online-Handel wohl immer zum Geschäftsmodell gehören.
                     </div>
+                    <div class="answer-feedback" id="feedback3"></div>
                 </div>
                 
                 <!-- Text 4 -->
@@ -430,6 +429,7 @@
                     <div class="text-content">
                         Keine Lust mehr auf die Konsum-Gesellschaft? Dann könnte es ein erster Schritt sein, den Lieblingspulli zu stopfen statt zu entsorgen oder den alten Wecker von Oma noch mal zum Laufen zu bringen. Ob Fahrrad, Fernseher oder Smartphone – man muss bei Defekten nicht gleich alles wegwerfen. In sogenannten Repair-Cafés können defekte Gegenstände unter fachkundiger Anleitung wieder instandgesetzt werden. „Damit schonen wir die Umwelt und den Geldbeutel", erklärt Thomas Rederitz, Inhaber eines solchen Reparaturcafés. Repair-Cafés verstehen sich als Initiative gegen die Wegwerfmentalität. Da viele Firmen keinen Reparaturservice mehr anbieten, muss vieles aufwendig entsorgt werden, sagt Rederitz. Dass dies nicht immer nötig sei, zeige die Praxis. Manchmal sei ja auch nur eine Schraube locker oder es fehle ein kleines Bauteil, das leicht ersetzt werden könne. „Im Reparaturcafé wird gemeinsam gewerkelt, geschraubt, genäht, gebastelt – und auch gelacht und geredet." Die Reparatur werde in jedem Fall sachgerecht durchgeführt; denn zu den freiwilligen Mitarbeitern von Repair-Cafés gehörten Handwerksmeister der unterschiedlichsten Fachrichtungen.
                     </div>
+                    <div class="answer-feedback" id="feedback4"></div>
                 </div>
                 
                 <!-- Text 5 -->
@@ -439,8 +439,9 @@
                         <div class="answer-placeholder">Antwort hier ablegen</div>
                     </div>
                     <div class="text-content">
-                        Viele Menschen sind erstaunlich großzügig: Sie machen anderen gern Geschenke, spenden Geld für gute Zwecke oder opfern Zeit für ehrenamtliche Tätigkeiten. Aber was motiviert sie dazu? Die Wissenschaft liefert ganz unterschiedliche Erklärungsansätze. Eine Erklärung lautet, dass großzügige Menschen auf Gegenseitigkeit hoffen: Wer viel gibt, bekommt auch viel zurück. Eine Studie konnte nun aber zeigen, dass die Antwort vielleicht ganz einfach ist: Großzügigkeit macht glücklich. Dies fanden Forscher der Universität Lübeck heraus. Diese enge Verknüpfung zwischen großzügigem Verhalten und Glücksgefühl zeige sich auch im Gehirn. So aktiviere ein solches Verhalten ein Hirnareal, das eng mit unserem Belohnungszentrum verknüpft sei. Das Ergebnis ihrer Studie könne weitreichende Folgen für die Gesellschaft haben. Wer glücklicher werden möchte, könne sich diese neuen Erkenntnisse zunutze machen: Denn wer für andere da ist, tut auch etwas für das eigene Wohlbefinden.
+                        Viele Menschen sind erstaunlich großzügig: Sie machen anderen gern Geschenke, spenden Geld für gute Zwecke oder opfern Zeit für ehrenamtliche Tätigkeiten. Aber was motiviert sie dazu? Die Wissenschaft liefert ganz unterschiedliche Erklärungsansätze. Eine Erklärung lautet, dass großzügige Menschen auf Gegenseitigkeit hoffen: Wer viel gibt, bekommt auch much zurück. Eine Studie konnte nun aber zeigen, dass die Antwort vielleicht ganz einfach ist: Großzügigkeit macht glücklich. Dies fanden Forscher der Universität Lübeck heraus. Diese enge Verknüpfung zwischen großzügigem Verhalten und Glücksgefühl zeige sich auch im Gehirn. So aktiviere ein solches Verhalten ein Hirnareal, das eng mit unserem Belohnungszentrum verknüpft sei. Das Ergebnis ihrer Studie könne weitreichende Folgen für die Gesellschaft haben. Wer glücklicher werden möchte, könne sich diese neuen Erkenntnisse zunutze machen: Denn wer für andere da ist, tut auch etwas für das eigene Wohlbefinden.
                     </div>
+                    <div class="answer-feedback" id="feedback5"></div>
                 </div>
             </div>
         </div>
@@ -458,12 +459,6 @@
     <div class="buttons-container">
         <button id="submitButton">Abschicken</button>
         <button id="resetButton">Zurücksetzen</button>
-    </div>
-    
-    <div class="feedback-container" id="feedbackContainer">
-        <h3>Ihre Ergebnisse</h3>
-        <div id="feedbackResults"></div>
-        <div class="score-display" id="scoreDisplay"></div>
     </div>
 
     <script>
@@ -493,6 +488,7 @@
         let selectedHeadings = {};
         let currentHeading = null;
         let answerBoxes = [];
+        let isChecked = false;
         
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
@@ -512,7 +508,7 @@
                 
                 // إضافة حدث النقر على العنوان
                 headingElement.addEventListener('click', function() {
-                    if (!headingElement.classList.contains('used')) {
+                    if (!headingElement.classList.contains('used') && !isChecked) {
                         selectHeading(heading.letter, heading.text);
                     }
                 });
@@ -526,14 +522,14 @@
             // إضافة أحداث النقر على صناديق الإجابة
             answerBoxes.forEach(box => {
                 box.addEventListener('click', function() {
-                    if (currentHeading) {
+                    if (currentHeading && !isChecked) {
                         const textNumber = this.dataset.text;
                         assignHeadingToText(textNumber, currentHeading.letter, currentHeading.text);
                     }
                 });
                 
                 box.addEventListener('mouseenter', function() {
-                    if (currentHeading) {
+                    if (currentHeading && !isChecked) {
                         this.classList.add('highlight');
                     }
                 });
@@ -565,7 +561,7 @@
             
             // إضافة تظليل لصناديق الإجابة
             answerBoxes.forEach(box => {
-                if (currentHeading) {
+                if (currentHeading && !isChecked) {
                     box.style.cursor = 'pointer';
                 }
             });
@@ -573,7 +569,7 @@
         
         // تعيين العنوان للنص
         function assignHeadingToText(textNumber, headingLetter, headingText) {
-            if (!currentHeading) return;
+            if (!currentHeading || isChecked) return;
             
             // إذا كان النص لديه بالفعل عنوان، قم بإزالته أولاً
             if (selectedHeadings[textNumber]) {
@@ -591,11 +587,11 @@
             const answerBox = document.getElementById(`answerBox${textNumber}`);
             answerBox.classList.remove('empty', 'highlight');
             answerBox.innerHTML = `
-                <div class="answer-content">
+                <div class="answer-content" id="answerContent${textNumber}">
                     <div>
                         <strong>${headingLetter}. ${headingText}</strong>
                     </div>
-                    <button class="remove-answer" onclick="removeHeadingFromText(${textNumber}, event)">×</button>
+                    ${!isChecked ? `<button class="remove-answer" onclick="removeHeadingFromText(${textNumber}, event)">×</button>` : ''}
                 </div>
             `;
             
@@ -618,7 +614,7 @@
         function removeHeadingFromText(textNumber, event) {
             if (event) event.stopPropagation();
             
-            if (selectedHeadings[textNumber]) {
+            if (selectedHeadings[textNumber] && !isChecked) {
                 const letter = selectedHeadings[textNumber].letter;
                 
                 // إزالة من التتبع
@@ -633,6 +629,11 @@
                 const headingElement = document.getElementById(`heading-${letter}`);
                 headingElement.classList.remove('used');
                 
+                // إخفاء التعليق التوضيحي
+                const feedbackElement = document.getElementById(`feedback${textNumber}`);
+                feedbackElement.style.display = 'none';
+                feedbackElement.innerHTML = '';
+                
                 // إلغاء أي تحديد حالي
                 if (currentHeading && currentHeading.letter === letter) {
                     currentHeading = null;
@@ -643,9 +644,7 @@
         
         // التحقق من الإجابات
         function checkAnswers() {
-            let correctCount = 0;
-            const feedbackResults = document.getElementById('feedbackResults');
-            feedbackResults.innerHTML = '';
+            isChecked = true;
             
             // التحقق من كل نص
             for (let i = 1; i <= 5; i++) {
@@ -653,71 +652,87 @@
                 const correctAnswer = correctAnswers[i];
                 const isCorrect = userAnswer === correctAnswer;
                 
-                if (isCorrect) correctCount++;
-                
-                // إنشاء عنصر النتيجة
-                const resultDiv = document.createElement('div');
-                resultDiv.className = `feedback-item ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
-                
-                if (userAnswer) {
-                    resultDiv.innerHTML = `
-                        <div>
-                            <strong>Text ${i}:</strong> Ihre Antwort: ${userAnswer}
-                        </div>
-                        <div>
-                            ${isCorrect ? 
-                                '✓ Richtig' : 
-                                `✗ Falsch (Richtig: ${correctAnswer})`}
-                        </div>
-                    `;
-                } else {
-                    resultDiv.innerHTML = `
-                        <div>
-                            <strong>Text ${i}:</strong> Keine Antwort ausgewählt
-                        </div>
-                        <div>
-                            ✗ Falsch (Richtig: ${correctAnswer})
-                        </div>
-                    `;
+                // تحديث صندوق الإجابة
+                const answerContent = document.getElementById(`answerContent${i}`);
+                if (answerContent) {
+                    answerContent.classList.remove('correct', 'incorrect');
+                    
+                    if (userAnswer) {
+                        answerContent.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        
+                        // إزالة زر الحذف
+                        const removeButton = answerContent.querySelector('.remove-answer');
+                        if (removeButton) {
+                            removeButton.remove();
+                        }
+                    }
                 }
                 
-                feedbackResults.appendChild(resultDiv);
+                // عرض التعليق التوضيحي
+                const feedbackElement = document.getElementById(`feedback${i}`);
+                feedbackElement.classList.remove('correct-feedback', 'incorrect-feedback');
+                
+                if (userAnswer) {
+                    if (isCorrect) {
+                        feedbackElement.innerHTML = `
+                            <div>✓ Richtig</div>
+                        `;
+                        feedbackElement.classList.add('correct-feedback');
+                    } else {
+                        const correctHeading = headings.find(h => h.letter === correctAnswer);
+                        feedbackElement.innerHTML = `
+                            <div>✗ Falsch - Richtige Antwort: <span class="correct-answer-text">${correctAnswer}. ${correctHeading.text}</span></div>
+                        `;
+                        feedbackElement.classList.add('incorrect-feedback');
+                    }
+                    feedbackElement.style.display = 'block';
+                } else {
+                    const correctHeading = headings.find(h => h.letter === correctAnswer);
+                    feedbackElement.innerHTML = `
+                        <div>✗ Keine Antwort - Richtige Antwort: <span class="correct-answer-text">${correctAnswer}. ${correctHeading.text}</span></div>
+                    `;
+                    feedbackElement.classList.add('incorrect-feedback');
+                    feedbackElement.style.display = 'block';
+                }
             }
             
-            // عرض النتيجة
-            const scoreDisplay = document.getElementById('scoreDisplay');
-            const percentage = Math.round((correctCount / 5) * 100);
-            scoreDisplay.textContent = `Ergebnis: ${correctCount} von 5 richtig (${percentage}%)`;
+            // تعطيل النقر على العناوين
+            document.querySelectorAll('.heading-item').forEach(item => {
+                item.style.cursor = 'default';
+            });
             
-            // إظهار حاوية النتائج
-            document.getElementById('feedbackContainer').style.display = 'block';
-            
-            // التمرير إلى النتائج
-            document.getElementById('feedbackContainer').scrollIntoView({ behavior: 'smooth' });
+            // تعطيل النقر على صناديق الإجابة
+            answerBoxes.forEach(box => {
+                box.style.cursor = 'default';
+            });
         }
         
         // إعادة تعيين كل شيء
         function resetSelections() {
             selectedHeadings = {};
             currentHeading = null;
+            isChecked = false;
             
             // إعادة تعيين صناديق الإجابة
             for (let i = 1; i <= 5; i++) {
                 const answerBox = document.getElementById(`answerBox${i}`);
                 answerBox.classList.add('empty');
                 answerBox.innerHTML = `<div class="answer-placeholder">Antwort hier ablegen</div>`;
-                answerBox.style.cursor = 'default';
+                answerBox.style.cursor = 'pointer';
                 answerBox.classList.remove('highlight');
+                
+                // إخفاء التعليق التوضيحي
+                const feedbackElement = document.getElementById(`feedback${i}`);
+                feedbackElement.style.display = 'none';
+                feedbackElement.innerHTML = '';
             }
             
             // إعادة تعيين العناوين
             headings.forEach(heading => {
                 const headingElement = document.getElementById(`heading-${heading.letter}`);
                 headingElement.classList.remove('used', 'selected');
+                headingElement.style.cursor = 'pointer';
             });
-            
-            // إخفاء النتائج
-            document.getElementById('feedbackContainer').style.display = 'none';
         }
     </script>
 </body>
