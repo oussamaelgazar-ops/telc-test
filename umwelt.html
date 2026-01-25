@@ -13,10 +13,10 @@
         }
         
         body {
-            background-color: #f5f5f5;
+            background-color: #f0f2f5;
             color: #333;
             padding: 20px;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
         
@@ -34,13 +34,14 @@
         }
         
         .instructions {
-            background-color: #e8f0fe;
+            background-color: #fff;
             padding: 20px;
             margin-bottom: 30px;
             border-radius: 8px;
             border-left: 5px solid #2c6fb7;
             font-size: 16px;
             line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         
         .instructions p {
@@ -51,42 +52,63 @@
             display: flex;
             gap: 40px;
             margin-bottom: 40px;
+            height: 70vh;
+            min-height: 600px;
         }
         
         .texts-section {
-            flex: 2;
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .texts-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+            border-right: 1px solid #ddd;
         }
         
         .headings-section {
             flex: 1;
+            display: flex;
+            flex-direction: column;
             background-color: white;
-            padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            height: fit-content;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-width: 350px;
         }
         
         .headings-section h2 {
             color: #2c6fb7;
-            margin-bottom: 25px;
+            padding: 20px;
             text-align: center;
             font-size: 22px;
-            padding-bottom: 10px;
+            background-color: #f8f9fa;
             border-bottom: 2px solid #eee;
+            margin: 0;
+        }
+        
+        .headings-list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
         }
         
         .headings-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
         
         .heading-item {
             background-color: #f8f9fa;
-            border: 2px solid #ddd;
+            border: 2px solid #dee2e6;
             border-radius: 6px;
             padding: 15px;
-            cursor: move;
+            cursor: pointer;
             transition: all 0.2s;
             font-size: 16px;
             position: relative;
@@ -95,8 +117,7 @@
         
         .heading-item:hover {
             background-color: #e9ecef;
-            border-color: #2c6fb7;
-            transform: translateY(-2px);
+            border-color: #adb5bd;
         }
         
         .heading-item.used {
@@ -104,11 +125,6 @@
             cursor: not-allowed;
             text-decoration: line-through;
             background-color: #f1f1f1;
-        }
-        
-        .heading-item.dragging {
-            opacity: 0.7;
-            transform: rotate(3deg);
         }
         
         .heading-letter {
@@ -128,7 +144,7 @@
         .text-box {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             padding: 25px;
             margin-bottom: 25px;
             border: 1px solid #e0e0e0;
@@ -145,7 +161,7 @@
         
         .answer-box {
             background-color: #f8f9fa;
-            border: 2px dashed #ccc;
+            border: 2px solid #dee2e6;
             border-radius: 6px;
             padding: 20px;
             margin: 20px 0;
@@ -160,16 +176,12 @@
             justify-content: center;
         }
         
-        .answer-box.highlight {
-            border-color: #2c6fb7;
-            background-color: #e8f0fe;
-        }
-        
         .answer-placeholder {
-            color: #888;
+            color: #6c757d;
             font-style: italic;
             text-align: center;
             width: 100%;
+            font-size: 16px;
         }
         
         .answer-content {
@@ -187,7 +199,7 @@
             background-color: #dc3545;
             color: white;
             border: none;
-            border-radius: 50%;
+            border-radius: 4px;
             width: 30px;
             height: 30px;
             font-size: 16px;
@@ -200,7 +212,6 @@
         
         .remove-answer:hover {
             background-color: #c82333;
-            transform: scale(1.1);
         }
         
         .text-content {
@@ -208,6 +219,10 @@
             text-align: justify;
             font-size: 16px;
             color: #444;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 10px;
+            padding-bottom: 10px;
         }
         
         .buttons-container {
@@ -236,8 +251,6 @@
         
         #submitButton:hover {
             background-color: #1a5ca8;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         #resetButton {
@@ -247,8 +260,6 @@
         
         #resetButton:hover {
             background-color: #5a6268;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         #homeButton {
@@ -258,8 +269,6 @@
         
         #homeButton:hover {
             background-color: #218838;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .feedback-container {
@@ -267,7 +276,7 @@
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: none;
             border-top: 5px solid #2c6fb7;
         }
@@ -310,11 +319,28 @@
             border-radius: 8px;
         }
         
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             .content-container {
                 flex-direction: column;
+                height: auto;
+                min-height: auto;
             }
             
+            .texts-container {
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+                max-height: 60vh;
+            }
+            
+            .headings-section {
+                min-width: auto;
+                max-height: 50vh;
+            }
+        }
+        
+        @media (max-width: 768px) {
             .buttons-container {
                 flex-direction: column;
                 align-items: center;
@@ -324,14 +350,6 @@
                 width: 100%;
                 max-width: 300px;
             }
-        }
-        
-        .drop-instruction {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-            margin-top: 10px;
-            font-style: italic;
         }
         
         .answer-label {
@@ -345,6 +363,111 @@
             font-size: 14px;
             font-weight: bold;
         }
+        
+        .scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        /* تخصيص scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .selection-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-title {
+            color: #2c6fb7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-heading {
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #2c6fb7;
+        }
+        
+        .text-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .text-option {
+            padding: 15px;
+            background: #e8f0fe;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        
+        .text-option:hover {
+            background: #d4e3fc;
+            border-color: #2c6fb7;
+        }
+        
+        .text-option.assigned {
+            background: #f8f9fa;
+            opacity: 0.8;
+        }
+        
+        .cancel-button {
+            padding: 12px 25px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .cancel-button:hover {
+            background: #5a6268;
+        }
     </style>
 </head>
 <body>
@@ -354,83 +477,81 @@
     </div>
     
     <div class="instructions">
-        <p><strong>Anleitung:</strong> Lesen Sie die fünf Texte und die zehn Überschriften. Ziehen Sie eine Überschrift per Drag & Drop in die Antwort-Box unter dem passenden Text. Jede Überschrift kann nur einmal verwendet werden.</p>
+        <p><strong>Anleitung:</strong> Lesen Sie die fünf Texte und die zehn Überschriften. Klicken Sie auf eine Überschrift, um sie einem Text zuzuordnen. Jede Überschrift kann nur einmal verwendet werden.</p>
         <p><strong>Korrekte Antworten:</strong> Text 1 → C, Text 2 → I, Text 3 → F, Text 4 → A, Text 5 → J</p>
     </div>
     
     <div class="content-container">
         <div class="texts-section">
-            <!-- Text 1 -->
-            <div class="text-box" id="text1">
-                <div class="text-number">Text 1</div>
-                <div class="text-content">
-                    Sie sind eine gut funktionierende Gemeinschaft mit einer Vision: Schon seit den 80er Jahren leben Mitglieder des „Tauschrings Harmelsdorf e.V; vor, wie man nachhaltig mit Ressourcen umgehen kann und dadurch die Umwelt schont, Tauschen, nicht wegwerfen ist das Motto dieser Initiative - die damals als eine der ersten dieser Art in Deutschland noch belächelt wurde, heute aber viel Lob und Anerkennung bekommt. Ob Küchengeräte, Bücher oder auch Kleidungsstücke, die man nicht mehr anzieht: Was ungenutzt, findet bei jemandem Verwendung, der noch etwas damit anfangen kann. Getauscht werden nicht nur Güter, sondern auch Dienstleistungen. Eine der Voraussetzungen für das Gelingen: „Die Dienstleistungen dürfen nicht in Konkurrenz zum Handwerk stehen", erklärt Tauschring- Mitglied Kati Jago. Besonders gefragt seien Fahrdienste, etwa zum Arzt. Ihre monatlichen Zusammenkünfte an der Rathausstraße sind für die derzeit 30 Vereinsmitglieder viel mehr als bloße Tauschtreffs: „Man darf den Faktor Mensch nicht unterschätzen", sagt Kati Jago. Denn beim Tauschen zählte auch das soziale Miteinander.
+            <div class="texts-container">
+                <!-- Text 1 -->
+                <div class="text-box" id="text1">
+                    <div class="text-number">Text 1</div>
+                    <div class="answer-box empty" id="answerBox1" data-text="1">
+                        <div class="answer-label">Antwort hier ablegen</div>
+                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                    </div>
+                    <div class="text-content">
+                        Sie sind eine gut funktionierende Gemeinschaft mit einer Vision: Schon seit den 80er Jahren leben Mitglieder des „Tauschrings Harmelsdorf e.V; vor, wie man nachhaltig mit Ressourcen umgehen kann und dadurch die Umwelt schont, Tauschen, nicht wegwerfen ist das Motto dieser Initiative - die damals als eine der ersten dieser Art in Deutschland noch belächelt wurde, heute aber viel Lob und Anerkennung bekommt. Ob Küchengeräte, Bücher oder auch Kleidungsstücke, die man nicht mehr anzieht: Was ungenutzt, findet bei jemandem Verwendung, der noch etwas damit anfangen kann. Getauscht werden nicht nur Güter, sondern auch Dienstleistungen. Eine der Voraussetzungen für das Gelingen: „Die Dienstleistungen dürfen nicht in Konkurrenz zum Handwerk stehen", erklärt Tauschring- Mitglied Kati Jago. Besonders gefragt seien Fahrdienste, etwa zum Arzt. Ihre monatlichen Zusammenkünfte an der Rathausstraße sind für die derzeit 30 Vereinsmitglieder viel mehr als bloße Tauschtreffs: „Man darf den Faktor Mensch nicht unterschätzen", sagt Kati Jago. Denn beim Tauschen zählte auch das soziale Miteinander.
+                    </div>
                 </div>
                 
-                <div class="answer-box empty" id="answerBox1" data-text="1">
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
-                </div>
-            </div>
-            
-            <!-- Text 2 -->
-            <div class="text-box" id="text2">
-                <div class="text-number">Text 2</div>
-                <div class="text-content">
-                    Man gönnt sich ja sonst nicht. Und schon ist die Einkaufstüte voll und das Konto leer. Macht das glücklich? Oder wieso sonst kauft man mehr, als man eigentlich geplant hat? Ein Einkauf kann sich ähnlich anfühlen wie eine Belohnung, sagt der Psychologe Daniel Stüber. Denn dabei würden Glückshormone ausgeschüttet. Manchmal könne das sogar in einem Kaufrausch enden. Denn das Glücksgefühl, das Konsumenten beim Kaufen erleben, könne sie dazu anregen, immer mehr Geld auszugeben. Doch die Ernüchterung folge oft schnell, warnt er: Denn wer später merke, wie teuer das alles gewesen sei, schütte Stresshormone aus. Dies könne zu Schlafstörungen und schlechter Laune führen. Langfristig lässt sich so die eigene Lebenszufriedenheit also nicht steigern.
-                </div>
-                
-                <div class="answer-box empty" id="answerBox2" data-text="2">
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
-                </div>
-            </div>
-            
-            <!-- Text 3 -->
-            <div class="text-box" id="text3">
-                <div class="text-number">Text 3</div>
-                <div class="text-content">
-                    Geklickt, gekauft, zurückgeschickt: Kunden nutzen im Online-Handel gerne die Möglichkeit, Waren innerhalb einer bestimmten Frist kostenlos zurückzusenden. Vor allem im Modehandel steigt die Zahl der Rücksendungen immer weiter an. Oft bestellen Kunden gleich mehrere Modelle in unterschiedlichen Größen, um sie zu Hause in Ruhe anzuprobieren. Die Kosten für die Retouren trägt der Anbieter. Dennoch lohnt sich für die Online-Händler das Geschäft. Die zurückgegebene Kleidung kann zum Beispiel oft so aufbereitet werden, dass sie erneut zum Verkauf angeboten werden kann. Rücksendungen werden sich im Online-Handel nie ganz vermeiden lassen, erklärt Birgit Steinköhler vom Bundesverband Online-Handel. Dennoch ist es möglich, dass sich ihre Anzahl in Zukunft senken lässt. Dies wünschen sich natürlich auch die Online-Verkäufer und suchen nach neuen Möglichkeiten: etwa detailliertere Produktinformationen oder neue Technologien, die die individuellen Maße der Kunden ermitteln. Dennoch: Rücksendungen werden im Online-Handel wohl immer zum Geschäftsmodell gehören.
+                <!-- Text 2 -->
+                <div class="text-box" id="text2">
+                    <div class="text-number">Text 2</div>
+                    <div class="answer-box empty" id="answerBox2" data-text="2">
+                        <div class="answer-label">Antwort hier ablegen</div>
+                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                    </div>
+                    <div class="text-content">
+                        Man gönnt sich ja sonst nicht. Und schon ist die Einkaufstüte voll und das Konto leer. Macht das glücklich? Oder wieso sonst kauft man mehr, als man eigentlich geplant hat? Ein Einkauf kann sich ähnlich anfühlen wie eine Belohnung, sagt der Psychologe Daniel Stüber. Denn dabei würden Glückshormone ausgeschüttet. Manchmal könne das sogar in einem Kaufrausch enden. Denn das Glücksgefühl, das Konsumenten beim Kaufen erleben, könne sie dazu anregen, immer mehr Geld auszugeben. Doch die Ernüchterung folge oft schnell, warnt er: Denn wer später merke, wie teuer das alles gewesen sei, schütte Stresshormone aus. Dies könne zu Schlafstörungen und schlechter Laune führen. Langfristig lässt sich so die eigene Lebenszufriedenheit also nicht steigern.
+                    </div>
                 </div>
                 
-                <div class="answer-box empty" id="answerBox3" data-text="3">
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
-                </div>
-            </div>
-            
-            <!-- Text 4 -->
-            <div class="text-box" id="text4">
-                <div class="text-number">Text 4</div>
-                <div class="text-content">
-                    Keine Lust mehr auf die Konsum-Gesellschaft? Dann könnte es ein erster Schritt sein, den Lieblingspulli zu stopfen statt zu entsorgen oder den alten Wecker von Oma noch mal zum Laufen zu bringen. Ob Fahrrad, Fernseher oder Smartphone – man muss bei Defekten nicht gleich alles wegwerfen. In sogenannten Repair-Cafés können defekte Gegenstände unter fachkundiger Anleitung wieder instandgesetzt werden. „Damit schonen wir die Umwelt und den Geldbeutel", erklärt Thomas Rederitz, Inhaber eines solchen Reparaturcafés. Repair-Cafés verstehen sich als Initiative gegen die Wegwerfmentalität. Da viele Firmen keinen Reparaturservice mehr anbieten, muss vieles aufwendig entsorgt werden, sagt Rederitz. Dass dies nicht immer nötig sei, zeige die Praxis. Manchmal sei ja auch nur eine Schraube locker oder es fehle ein kleines Bauteil, das leicht ersetzt werden könne. „Im Reparaturcafé wird gemeinsam gewerkelt, geschraubt, genäht, gebastelt – und auch gelacht und geredet." Die Reparatur werde in jedem Fall sachgerecht durchgeführt; denn zu den freiwilligen Mitarbeitern von Repair-Cafés gehörten Handwerksmeister der unterschiedlichsten Fachrichtungen.
-                </div>
-                
-                <div class="answer-box empty" id="answerBox4" data-text="4">
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
-                </div>
-            </div>
-            
-            <!-- Text 5 -->
-            <div class="text-box" id="text5">
-                <div class="text-number">Text 5</div>
-                <div class="text-content">
-                    Viele Menschen sind erstaunlich großzügig: Sie machen anderen gern Geschenke, spenden Geld für gute Zwecke oder opfern Zeit für ehrenamtliche Tätigkeiten. Aber was motiviert sie dazu? Die Wissenschaft liefert ganz unterschiedliche Erklärungsansätze. Eine Erklärung lautet, dass großzügige Menschen auf Gegenseitigkeit hoffen: Wer viel gibt, bekommt auch viel zurück. Eine Studie konnte nun aber zeigen, dass die Antwort vielleicht ganz einfach ist: Großzügigkeit macht glücklich. Dies fanden Forscher der Universität Lübeck heraus. Diese enge Verknüpfung zwischen großzügigem Verhalten und Glücksgefühl zeige sich auch im Gehirn. So aktiviere ein solches Verhalten ein Hirnareal, das eng mit unserem Belohnungszentrum verknüpft sei. Das Ergebnis ihrer Studie könne weitreichende Folgen für die Gesellschaft haben. Wer glücklicher werden möchte, könne sich diese neuen Erkenntnisse zunutze machen: Denn wer für andere da ist, tut auch etwas für das eigene Wohlbefinden.
+                <!-- Text 3 -->
+                <div class="text-box" id="text3">
+                    <div class="text-number">Text 3</div>
+                    <div class="answer-box empty" id="answerBox3" data-text="3">
+                        <div class="answer-label">Antwort hier ablegen</div>
+                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                    </div>
+                    <div class="text-content">
+                        Geklickt, gekauft, zurückgeschickt: Kunden nutzen im Online-Handel gerne die Möglichkeit, Waren innerhalb einer bestimmten Frist kostenlos zurückzusenden. Vor allem im Modehandel steigt die Zahl der Rücksendungen immer weiter an. Oft bestellen Kunden gleich mehrere Modelle in unterschiedlichen Größen, um sie zu Hause in Ruhe anzuprobieren. Die Kosten für die Retouren trägt der Anbieter. Dennoch lohnt sich für die Online-Händler das Geschäft. Die zurückgegebene Kleidung kann zum Beispiel oft so aufbereitet werden, dass sie erneut zum Verkauf angeboten werden kann. Rücksendungen werden sich im Online-Handel nie ganz vermeiden lassen, erklärt Birgit Steinköhler vom Bundesverband Online-Handel. Dennoch ist es möglich, dass sich ihre Anzahl in Zukunft senken lässt. Dies wünschen sich natürlich auch die Online-Verkäufer und suchen nach neuen Möglichkeiten: etwa detailliertere Produktinformationen oder neue Technologien, die die individuellen Maße der Kunden ermitteln. Dennoch: Rücksendungen werden im Online-Handel wohl immer zum Geschäftsmodell gehören.
+                    </div>
                 </div>
                 
-                <div class="answer-box empty" id="answerBox5" data-text="5">
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
+                <!-- Text 4 -->
+                <div class="text-box" id="text4">
+                    <div class="text-number">Text 4</div>
+                    <div class="answer-box empty" id="answerBox4" data-text="4">
+                        <div class="answer-label">Antwort hier ablegen</div>
+                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                    </div>
+                    <div class="text-content">
+                        Keine Lust mehr auf die Konsum-Gesellschaft? Dann könnte es ein erster Schritt sein, den Lieblingspulli zu stopfen statt zu entsorgen oder den alten Wecker von Oma noch mal zum Laufen zu bringen. Ob Fahrrad, Fernseher oder Smartphone – man muss bei Defekten nicht gleich alles wegwerfen. In sogenannten Repair-Cafés können defekte Gegenstände unter fachkundiger Anleitung wieder instandgesetzt werden. „Damit schonen wir die Umwelt und den Geldbeutel", erklärt Thomas Rederitz, Inhaber eines solchen Reparaturcafés. Repair-Cafés verstehen sich als Initiative gegen die Wegwerfmentalität. Da viele Firmen keinen Reparaturservice mehr anbieten, muss vieles aufwendig entsorgt werden, sagt Rederitz. Dass dies nicht immer nötig sei, zeige die Praxis. Manchmal sei ja auch nur eine Schraube locker oder es fehle ein kleines Bauteil, das leicht ersetzt werden könne. „Im Reparaturcafé wird gemeinsam gewerkelt, geschraubt, genäht, gebastelt – und auch gelacht und geredet." Die Reparatur werde in jedem Fall sachgerecht durchgeführt; denn zu den freiwilligen Mitarbeitern von Repair-Cafés gehörten Handwerksmeister der unterschiedlichsten Fachrichtungen.
+                    </div>
+                </div>
+                
+                <!-- Text 5 -->
+                <div class="text-box" id="text5">
+                    <div class="text-number">Text 5</div>
+                    <div class="answer-box empty" id="answerBox5" data-text="5">
+                        <div class="answer-label">Antwort hier ablegen</div>
+                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                    </div>
+                    <div class="text-content">
+                        Viele Menschen sind erstaunlich großzügig: Sie machen anderen gern Geschenke, spenden Geld für gute Zwecke oder opfern Zeit für ehrenamtliche Tätigkeiten. Aber was motiviert sie dazu? Die Wissenschaft liefert ganz unterschiedliche Erklärungsansätze. Eine Erklärung lautet, dass großzügige Menschen auf Gegenseitigkeit hoffen: Wer viel gibt, bekommt auch viel zurück. Eine Studie konnte nun aber zeigen, dass die Antwort vielleicht ganz einfach ist: Großzügigkeit macht glücklich. Dies fanden Forscher der Universität Lübeck heraus. Diese enge Verknüpfung zwischen großzügigem Verhalten und Glücksgefühl zeige sich auch im Gehirn. So aktiviere ein solches Verhalten ein Hirnareal, das eng mit unserem Belohnungszentrum verknüpft sei. Das Ergebnis ihrer Studie könne weitreichende Folgen für die Gesellschaft haben. Wer glücklicher werden möchte, könne sich diese neuen Erkenntnisse zunutze machen: Denn wer für andere da ist, tut auch etwas für das eigene Wohlbefinden.
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="headings-section">
             <h2>Überschriften A-J</h2>
-            <p class="drop-instruction">Ziehen Sie eine Überschrift in die Antwort-Box eines Textes</p>
-            <div class="headings-list" id="headingsList">
-                <!-- العناوين ستضاف بواسطة الجافاسكريبت -->
+            <div class="headings-list-container">
+                <div class="headings-list" id="headingsList">
+                    <!-- العناوين ستضاف بواسطة الجافاسكريبت -->
+                </div>
             </div>
         </div>
     </div>
@@ -472,7 +593,7 @@
         
         // متغيرات التتبع
         let selectedHeadings = {};
-        let draggedHeading = null;
+        let currentHeading = null;
         
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
@@ -482,7 +603,6 @@
                 const headingElement = document.createElement('div');
                 headingElement.className = 'heading-item';
                 headingElement.id = `heading-${heading.letter}`;
-                headingElement.draggable = true;
                 headingElement.dataset.letter = heading.letter;
                 headingElement.dataset.text = heading.text;
                 
@@ -491,20 +611,14 @@
                     <span class="heading-text">${heading.text}</span>
                 `;
                 
-                // إضافة أحداث السحب والإفلات
-                headingElement.addEventListener('dragstart', handleDragStart);
-                headingElement.addEventListener('dragend', handleDragEnd);
+                // إضافة حدث النقر
+                headingElement.addEventListener('click', function() {
+                    if (!headingElement.classList.contains('used')) {
+                        openSelectionModal(heading.letter, heading.text);
+                    }
+                });
                 
                 headingsList.appendChild(headingElement);
-            });
-            
-            // إضافة أحداث السحب والإفلال لصناديق الإجابة
-            const answerBoxes = document.querySelectorAll('.answer-box');
-            answerBoxes.forEach(box => {
-                box.addEventListener('dragover', handleDragOver);
-                box.addEventListener('dragenter', handleDragEnter);
-                box.addEventListener('dragleave', handleDragLeave);
-                box.addEventListener('drop', handleDrop);
             });
             
             // أحداث الأزرار
@@ -515,84 +629,69 @@
             });
         });
         
-        // معالجة بدء السحب
-        function handleDragStart(e) {
-            const headingElement = e.target.closest('.heading-item');
-            if (headingElement.classList.contains('used')) {
-                e.preventDefault();
-                return;
+        // فتح نافذة اختيار النص
+        function openSelectionModal(headingLetter, headingText) {
+            currentHeading = { letter: headingLetter, text: headingText };
+            
+            // إنشاء نافذة الاختيار
+            const modal = document.createElement('div');
+            modal.className = 'selection-modal';
+            modal.id = 'selectionModal';
+            
+            // إنشاء خيارات النصوص
+            let textOptionsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const hasHeading = selectedHeadings[i] ? true : false;
+                const assignedText = hasHeading ? ` (Bereits: ${selectedHeadings[i].letter})` : '';
+                
+                textOptionsHTML += `
+                    <button class="text-option ${hasHeading ? 'assigned' : ''}" 
+                            onclick="assignHeadingToText(${i}, '${headingLetter}', '${headingText}')">
+                        <strong>Text ${i}</strong>
+                        ${assignedText}
+                    </button>
+                `;
             }
             
-            draggedHeading = {
-                letter: headingElement.dataset.letter,
-                text: headingElement.dataset.text
-            };
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3 class="modal-title">Überschrift auswählen</h3>
+                    <div class="modal-heading">
+                        <strong>${headingLetter}. ${headingText}</strong>
+                    </div>
+                    <p>Wählen Sie den passenden Text:</p>
+                    <div class="text-options">
+                        ${textOptionsHTML}
+                    </div>
+                    <button class="cancel-button" onclick="closeSelectionModal()">Abbrechen</button>
+                </div>
+            `;
             
-            headingElement.classList.add('dragging');
-            e.dataTransfer.setData('text/plain', headingElement.dataset.letter);
-            e.dataTransfer.effectAllowed = 'move';
+            document.body.appendChild(modal);
         }
         
-        // معالجة انتهاء السحب
-        function handleDragEnd(e) {
-            const headingElement = e.target.closest('.heading-item');
-            headingElement.classList.remove('dragging');
-            draggedHeading = null;
-            
-            // إزالة التظليل من جميع صناديق الإجابة
-            document.querySelectorAll('.answer-box').forEach(box => {
-                box.classList.remove('highlight');
-            });
-        }
-        
-        // معالجة السحب فوق صندوق الإجابة
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-        }
-        
-        // معالجة دخول السحب إلى صندوق الإجابة
-        function handleDragEnter(e) {
-            e.preventDefault();
-            const answerBox = e.target.closest('.answer-box');
-            if (answerBox && draggedHeading && !answerBox.classList.contains('used')) {
-                answerBox.classList.add('highlight');
+        // إغلاق نافذة الاختيار
+        function closeSelectionModal() {
+            const modal = document.getElementById('selectionModal');
+            if (modal) {
+                modal.remove();
             }
-        }
-        
-        // معالجة مغادرة السحب من صندوق الإجابة
-        function handleDragLeave(e) {
-            const answerBox = e.target.closest('.answer-box');
-            if (answerBox) {
-                answerBox.classList.remove('highlight');
-            }
-        }
-        
-        // معالجة إفلات العنوان
-        function handleDrop(e) {
-            e.preventDefault();
-            
-            const answerBox = e.target.closest('.answer-box');
-            if (!answerBox || !draggedHeading) return;
-            
-            const textNumber = answerBox.dataset.text;
-            
-            // إذا كان هناك عنوان مسبقاً، قم بإزالته أولاً
-            if (selectedHeadings[textNumber]) {
-                removeHeadingFromText(textNumber);
-            }
-            
-            // تعيين العنوان الجديد
-            assignHeadingToText(textNumber, draggedHeading.letter, draggedHeading.text);
-            
-            // إزالة التظليل
-            answerBox.classList.remove('highlight');
+            currentHeading = null;
         }
         
         // تعيين العنوان للنص
-        function assignHeadingToText(textNumber, letter, text) {
-            // تحديث التتبع
-            selectedHeadings[textNumber] = { letter, text };
+        function assignHeadingToText(textNumber, headingLetter, headingText) {
+            // إذا كان النص لديه بالفعل عنوان، قم بإزالته أولاً
+            if (selectedHeadings[textNumber]) {
+                const oldHeading = selectedHeadings[textNumber].letter;
+                document.getElementById(`heading-${oldHeading}`).classList.remove('used');
+            }
+            
+            // تعيين العنوان الجديد
+            selectedHeadings[textNumber] = {
+                letter: headingLetter,
+                text: headingText
+            };
             
             // تحديث واجهة صندوق الإجابة
             const answerBox = document.getElementById(`answerBox${textNumber}`);
@@ -601,15 +700,18 @@
                 <div class="answer-label">Antwort hier ablegen</div>
                 <div class="answer-content">
                     <div>
-                        <strong>${letter}. ${text}</strong>
+                        <strong>${headingLetter}. ${headingText}</strong>
                     </div>
                     <button class="remove-answer" onclick="removeHeadingFromText(${textNumber})">×</button>
                 </div>
             `;
             
             // تحديث واجهة العنوان (جعله مستخدماً)
-            const headingElement = document.getElementById(`heading-${letter}`);
+            const headingElement = document.getElementById(`heading-${headingLetter}`);
             headingElement.classList.add('used');
+            
+            // إغلاق نافذة الاختيار
+            closeSelectionModal();
         }
         
         // إزالة العنوان من النص
@@ -625,7 +727,7 @@
                 answerBox.classList.add('empty');
                 answerBox.innerHTML = `
                     <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
+                    <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
                 `;
                 
                 // تحديث واجهة العنوان (جعله غير مستخدم)
@@ -687,11 +789,6 @@
             
             // التمرير إلى النتائج
             document.getElementById('feedbackContainer').scrollIntoView({ behavior: 'smooth' });
-            
-            // تعطيل السحب بعد التحقق
-            document.querySelectorAll('.heading-item').forEach(item => {
-                item.draggable = false;
-            });
         }
         
         // إعادة تعيين كل شيء
@@ -704,7 +801,7 @@
                 answerBox.classList.add('empty');
                 answerBox.innerHTML = `
                     <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Ziehen Sie hier eine Überschrift hin</div>
+                    <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
                 `;
             }
             
@@ -712,11 +809,13 @@
             headings.forEach(heading => {
                 const headingElement = document.getElementById(`heading-${heading.letter}`);
                 headingElement.classList.remove('used');
-                headingElement.draggable = true;
             });
             
             // إخفاء النتائج
             document.getElementById('feedbackContainer').style.display = 'none';
+            
+            // إغلاق أي نافذة اختيار مفتوحة
+            closeSelectionModal();
         }
     </script>
 </body>
