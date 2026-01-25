@@ -120,6 +120,11 @@
             border-color: #adb5bd;
         }
         
+        .heading-item.selected {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
         .heading-item.used {
             opacity: 0.4;
             cursor: not-allowed;
@@ -168,6 +173,7 @@
             min-height: 80px;
             transition: all 0.3s;
             position: relative;
+            cursor: pointer;
         }
         
         .answer-box.empty {
@@ -176,12 +182,17 @@
             justify-content: center;
         }
         
+        .answer-box.highlight {
+            background-color: #e8f0fe;
+            border-color: #2c6fb7;
+        }
+        
         .answer-placeholder {
             color: #6c757d;
-            font-style: italic;
             text-align: center;
             width: 100%;
             font-size: 16px;
+            font-weight: bold;
         }
         
         .answer-content {
@@ -364,12 +375,6 @@
             font-weight: bold;
         }
         
-        .scroll-container {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-        
         /* تخصيص scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
@@ -389,84 +394,15 @@
             background: #a8a8a8;
         }
         
-        .selection-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .modal-title {
-            color: #2c6fb7;
-            margin-bottom: 20px;
+        .selected-heading-info {
             text-align: center;
-        }
-        
-        .modal-heading {
+            color: #28a745;
             font-weight: bold;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-            border-left: 4px solid #2c6fb7;
-        }
-        
-        .text-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-        
-        .text-option {
-            padding: 15px;
-            background: #e8f0fe;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s;
-        }
-        
-        .text-option:hover {
-            background: #d4e3fc;
-            border-color: #2c6fb7;
-        }
-        
-        .text-option.assigned {
-            background: #f8f9fa;
-            opacity: 0.8;
-        }
-        
-        .cancel-button {
-            padding: 12px 25px;
-            background: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        
-        .cancel-button:hover {
-            background: #5a6268;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #d4edda;
+            border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -477,7 +413,7 @@
     </div>
     
     <div class="instructions">
-        <p><strong>Anleitung:</strong> Lesen Sie die fünf Texte und die zehn Überschriften. Klicken Sie auf eine Überschrift, um sie einem Text zuzuordnen. Jede Überschrift kann nur einmal verwendet werden.</p>
+        <p><strong>Anleitung:</strong> Lesen Sie die fünf Texte und die zehn Überschriften. 1. Klicken Sie auf eine Überschrift. 2. Klicken Sie dann auf die Antwort-Box des passenden Textes. Jede Überschrift kann nur einmal verwendet werden.</p>
         <p><strong>Korrekte Antworten:</strong> Text 1 → C, Text 2 → I, Text 3 → F, Text 4 → A, Text 5 → J</p>
     </div>
     
@@ -488,8 +424,7 @@
                 <div class="text-box" id="text1">
                     <div class="text-number">Text 1</div>
                     <div class="answer-box empty" id="answerBox1" data-text="1">
-                        <div class="answer-label">Antwort hier ablegen</div>
-                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                        <div class="answer-placeholder">Antwort hier ablegen</div>
                     </div>
                     <div class="text-content">
                         Sie sind eine gut funktionierende Gemeinschaft mit einer Vision: Schon seit den 80er Jahren leben Mitglieder des „Tauschrings Harmelsdorf e.V; vor, wie man nachhaltig mit Ressourcen umgehen kann und dadurch die Umwelt schont, Tauschen, nicht wegwerfen ist das Motto dieser Initiative - die damals als eine der ersten dieser Art in Deutschland noch belächelt wurde, heute aber viel Lob und Anerkennung bekommt. Ob Küchengeräte, Bücher oder auch Kleidungsstücke, die man nicht mehr anzieht: Was ungenutzt, findet bei jemandem Verwendung, der noch etwas damit anfangen kann. Getauscht werden nicht nur Güter, sondern auch Dienstleistungen. Eine der Voraussetzungen für das Gelingen: „Die Dienstleistungen dürfen nicht in Konkurrenz zum Handwerk stehen", erklärt Tauschring- Mitglied Kati Jago. Besonders gefragt seien Fahrdienste, etwa zum Arzt. Ihre monatlichen Zusammenkünfte an der Rathausstraße sind für die derzeit 30 Vereinsmitglieder viel mehr als bloße Tauschtreffs: „Man darf den Faktor Mensch nicht unterschätzen", sagt Kati Jago. Denn beim Tauschen zählte auch das soziale Miteinander.
@@ -500,8 +435,7 @@
                 <div class="text-box" id="text2">
                     <div class="text-number">Text 2</div>
                     <div class="answer-box empty" id="answerBox2" data-text="2">
-                        <div class="answer-label">Antwort hier ablegen</div>
-                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                        <div class="answer-placeholder">Antwort hier ablegen</div>
                     </div>
                     <div class="text-content">
                         Man gönnt sich ja sonst nicht. Und schon ist die Einkaufstüte voll und das Konto leer. Macht das glücklich? Oder wieso sonst kauft man mehr, als man eigentlich geplant hat? Ein Einkauf kann sich ähnlich anfühlen wie eine Belohnung, sagt der Psychologe Daniel Stüber. Denn dabei würden Glückshormone ausgeschüttet. Manchmal könne das sogar in einem Kaufrausch enden. Denn das Glücksgefühl, das Konsumenten beim Kaufen erleben, könne sie dazu anregen, immer mehr Geld auszugeben. Doch die Ernüchterung folge oft schnell, warnt er: Denn wer später merke, wie teuer das alles gewesen sei, schütte Stresshormone aus. Dies könne zu Schlafstörungen und schlechter Laune führen. Langfristig lässt sich so die eigene Lebenszufriedenheit also nicht steigern.
@@ -512,8 +446,7 @@
                 <div class="text-box" id="text3">
                     <div class="text-number">Text 3</div>
                     <div class="answer-box empty" id="answerBox3" data-text="3">
-                        <div class="answer-label">Antwort hier ablegen</div>
-                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                        <div class="answer-placeholder">Antwort hier ablegen</div>
                     </div>
                     <div class="text-content">
                         Geklickt, gekauft, zurückgeschickt: Kunden nutzen im Online-Handel gerne die Möglichkeit, Waren innerhalb einer bestimmten Frist kostenlos zurückzusenden. Vor allem im Modehandel steigt die Zahl der Rücksendungen immer weiter an. Oft bestellen Kunden gleich mehrere Modelle in unterschiedlichen Größen, um sie zu Hause in Ruhe anzuprobieren. Die Kosten für die Retouren trägt der Anbieter. Dennoch lohnt sich für die Online-Händler das Geschäft. Die zurückgegebene Kleidung kann zum Beispiel oft so aufbereitet werden, dass sie erneut zum Verkauf angeboten werden kann. Rücksendungen werden sich im Online-Handel nie ganz vermeiden lassen, erklärt Birgit Steinköhler vom Bundesverband Online-Handel. Dennoch ist es möglich, dass sich ihre Anzahl in Zukunft senken lässt. Dies wünschen sich natürlich auch die Online-Verkäufer und suchen nach neuen Möglichkeiten: etwa detailliertere Produktinformationen oder neue Technologien, die die individuellen Maße der Kunden ermitteln. Dennoch: Rücksendungen werden im Online-Handel wohl immer zum Geschäftsmodell gehören.
@@ -524,8 +457,7 @@
                 <div class="text-box" id="text4">
                     <div class="text-number">Text 4</div>
                     <div class="answer-box empty" id="answerBox4" data-text="4">
-                        <div class="answer-label">Antwort hier ablegen</div>
-                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                        <div class="answer-placeholder">Antwort hier ablegen</div>
                     </div>
                     <div class="text-content">
                         Keine Lust mehr auf die Konsum-Gesellschaft? Dann könnte es ein erster Schritt sein, den Lieblingspulli zu stopfen statt zu entsorgen oder den alten Wecker von Oma noch mal zum Laufen zu bringen. Ob Fahrrad, Fernseher oder Smartphone – man muss bei Defekten nicht gleich alles wegwerfen. In sogenannten Repair-Cafés können defekte Gegenstände unter fachkundiger Anleitung wieder instandgesetzt werden. „Damit schonen wir die Umwelt und den Geldbeutel", erklärt Thomas Rederitz, Inhaber eines solchen Reparaturcafés. Repair-Cafés verstehen sich als Initiative gegen die Wegwerfmentalität. Da viele Firmen keinen Reparaturservice mehr anbieten, muss vieles aufwendig entsorgt werden, sagt Rederitz. Dass dies nicht immer nötig sei, zeige die Praxis. Manchmal sei ja auch nur eine Schraube locker oder es fehle ein kleines Bauteil, das leicht ersetzt werden könne. „Im Reparaturcafé wird gemeinsam gewerkelt, geschraubt, genäht, gebastelt – und auch gelacht und geredet." Die Reparatur werde in jedem Fall sachgerecht durchgeführt; denn zu den freiwilligen Mitarbeitern von Repair-Cafés gehörten Handwerksmeister der unterschiedlichsten Fachrichtungen.
@@ -536,8 +468,7 @@
                 <div class="text-box" id="text5">
                     <div class="text-number">Text 5</div>
                     <div class="answer-box empty" id="answerBox5" data-text="5">
-                        <div class="answer-label">Antwort hier ablegen</div>
-                        <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
+                        <div class="answer-placeholder">Antwort hier ablegen</div>
                     </div>
                     <div class="text-content">
                         Viele Menschen sind erstaunlich großzügig: Sie machen anderen gern Geschenke, spenden Geld für gute Zwecke oder opfern Zeit für ehrenamtliche Tätigkeiten. Aber was motiviert sie dazu? Die Wissenschaft liefert ganz unterschiedliche Erklärungsansätze. Eine Erklärung lautet, dass großzügige Menschen auf Gegenseitigkeit hoffen: Wer viel gibt, bekommt auch viel zurück. Eine Studie konnte nun aber zeigen, dass die Antwort vielleicht ganz einfach ist: Großzügigkeit macht glücklich. Dies fanden Forscher der Universität Lübeck heraus. Diese enge Verknüpfung zwischen großzügigem Verhalten und Glücksgefühl zeige sich auch im Gehirn. So aktiviere ein solches Verhalten ein Hirnareal, das eng mit unserem Belohnungszentrum verknüpft sei. Das Ergebnis ihrer Studie könne weitreichende Folgen für die Gesellschaft haben. Wer glücklicher werden möchte, könne sich diese neuen Erkenntnisse zunutze machen: Denn wer für andere da ist, tut auch etwas für das eigene Wohlbefinden.
@@ -548,6 +479,7 @@
         
         <div class="headings-section">
             <h2>Überschriften A-J</h2>
+            <div class="selected-heading-info" id="selectedHeadingInfo"></div>
             <div class="headings-list-container">
                 <div class="headings-list" id="headingsList">
                     <!-- العناوين ستضاف بواسطة الجافاسكريبت -->
@@ -594,6 +526,7 @@
         // متغيرات التتبع
         let selectedHeadings = {};
         let currentHeading = null;
+        let answerBoxes = [];
         
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
@@ -611,14 +544,37 @@
                     <span class="heading-text">${heading.text}</span>
                 `;
                 
-                // إضافة حدث النقر
+                // إضافة حدث النقر على العنوان
                 headingElement.addEventListener('click', function() {
                     if (!headingElement.classList.contains('used')) {
-                        openSelectionModal(heading.letter, heading.text);
+                        selectHeading(heading.letter, heading.text);
                     }
                 });
                 
                 headingsList.appendChild(headingElement);
+            });
+            
+            // جمع صناديق الإجابة
+            answerBoxes = document.querySelectorAll('.answer-box');
+            
+            // إضافة أحداث النقر على صناديق الإجابة
+            answerBoxes.forEach(box => {
+                box.addEventListener('click', function() {
+                    if (currentHeading) {
+                        const textNumber = this.dataset.text;
+                        assignHeadingToText(textNumber, currentHeading.letter, currentHeading.text);
+                    }
+                });
+                
+                box.addEventListener('mouseenter', function() {
+                    if (currentHeading) {
+                        this.classList.add('highlight');
+                    }
+                });
+                
+                box.addEventListener('mouseleave', function() {
+                    this.classList.remove('highlight');
+                });
             });
             
             // أحداث الأزرار
@@ -629,62 +585,42 @@
             });
         });
         
-        // فتح نافذة اختيار النص
-        function openSelectionModal(headingLetter, headingText) {
+        // اختيار عنوان
+        function selectHeading(headingLetter, headingText) {
+            // إلغاء تحديد العنوان السابق إن وجد
+            if (currentHeading) {
+                const prevHeadingElement = document.getElementById(`heading-${currentHeading.letter}`);
+                if (prevHeadingElement && !prevHeadingElement.classList.contains('used')) {
+                    prevHeadingElement.classList.remove('selected');
+                }
+            }
+            
+            // تحديد العنوان الجديد
             currentHeading = { letter: headingLetter, text: headingText };
+            const headingElement = document.getElementById(`heading-${headingLetter}`);
+            headingElement.classList.add('selected');
             
-            // إنشاء نافذة الاختيار
-            const modal = document.createElement('div');
-            modal.className = 'selection-modal';
-            modal.id = 'selectionModal';
+            // عرض رسالة للمستخدم
+            const infoElement = document.getElementById('selectedHeadingInfo');
+            infoElement.textContent = `Ausgewählt: ${headingLetter}. ${headingText} - Klicken Sie jetzt auf eine Antwort-Box`;
+            infoElement.style.display = 'block';
             
-            // إنشاء خيارات النصوص
-            let textOptionsHTML = '';
-            for (let i = 1; i <= 5; i++) {
-                const hasHeading = selectedHeadings[i] ? true : false;
-                const assignedText = hasHeading ? ` (Bereits: ${selectedHeadings[i].letter})` : '';
-                
-                textOptionsHTML += `
-                    <button class="text-option ${hasHeading ? 'assigned' : ''}" 
-                            onclick="assignHeadingToText(${i}, '${headingLetter}', '${headingText}')">
-                        <strong>Text ${i}</strong>
-                        ${assignedText}
-                    </button>
-                `;
-            }
-            
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <h3 class="modal-title">Überschrift auswählen</h3>
-                    <div class="modal-heading">
-                        <strong>${headingLetter}. ${headingText}</strong>
-                    </div>
-                    <p>Wählen Sie den passenden Text:</p>
-                    <div class="text-options">
-                        ${textOptionsHTML}
-                    </div>
-                    <button class="cancel-button" onclick="closeSelectionModal()">Abbrechen</button>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-        
-        // إغلاق نافذة الاختيار
-        function closeSelectionModal() {
-            const modal = document.getElementById('selectionModal');
-            if (modal) {
-                modal.remove();
-            }
-            currentHeading = null;
+            // إضافة تظليل لصناديق الإجابة
+            answerBoxes.forEach(box => {
+                if (currentHeading) {
+                    box.style.cursor = 'pointer';
+                }
+            });
         }
         
         // تعيين العنوان للنص
         function assignHeadingToText(textNumber, headingLetter, headingText) {
+            if (!currentHeading) return;
+            
             // إذا كان النص لديه بالفعل عنوان، قم بإزالته أولاً
             if (selectedHeadings[textNumber]) {
                 const oldHeading = selectedHeadings[textNumber].letter;
-                document.getElementById(`heading-${oldHeading}`).classList.remove('used');
+                document.getElementById(`heading-${oldHeading}`).classList.remove('used', 'selected');
             }
             
             // تعيين العنوان الجديد
@@ -695,27 +631,38 @@
             
             // تحديث واجهة صندوق الإجابة
             const answerBox = document.getElementById(`answerBox${textNumber}`);
-            answerBox.classList.remove('empty');
+            answerBox.classList.remove('empty', 'highlight');
             answerBox.innerHTML = `
-                <div class="answer-label">Antwort hier ablegen</div>
                 <div class="answer-content">
                     <div>
                         <strong>${headingLetter}. ${headingText}</strong>
                     </div>
-                    <button class="remove-answer" onclick="removeHeadingFromText(${textNumber})">×</button>
+                    <button class="remove-answer" onclick="removeHeadingFromText(${textNumber}, event)">×</button>
                 </div>
             `;
             
             // تحديث واجهة العنوان (جعله مستخدماً)
             const headingElement = document.getElementById(`heading-${headingLetter}`);
             headingElement.classList.add('used');
+            headingElement.classList.remove('selected');
             
-            // إغلاق نافذة الاختيار
-            closeSelectionModal();
+            // إزالة التحديد الحالي
+            currentHeading = null;
+            
+            // إخفاء رسالة المعلومات
+            document.getElementById('selectedHeadingInfo').style.display = 'none';
+            
+            // إزالة تظليل صناديق الإجابة
+            answerBoxes.forEach(box => {
+                box.style.cursor = 'default';
+                box.classList.remove('highlight');
+            });
         }
         
         // إزالة العنوان من النص
-        function removeHeadingFromText(textNumber) {
+        function removeHeadingFromText(textNumber, event) {
+            if (event) event.stopPropagation();
+            
             if (selectedHeadings[textNumber]) {
                 const letter = selectedHeadings[textNumber].letter;
                 
@@ -725,14 +672,18 @@
                 // تحديث واجهة صندوق الإجابة
                 const answerBox = document.getElementById(`answerBox${textNumber}`);
                 answerBox.classList.add('empty');
-                answerBox.innerHTML = `
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
-                `;
+                answerBox.innerHTML = `<div class="answer-placeholder">Antwort hier ablegen</div>`;
                 
                 // تحديث واجهة العنوان (جعله غير مستخدم)
                 const headingElement = document.getElementById(`heading-${letter}`);
                 headingElement.classList.remove('used');
+                
+                // إلغاء أي تحديد حالي
+                if (currentHeading && currentHeading.letter === letter) {
+                    currentHeading = null;
+                    document.getElementById('selectedHeadingInfo').style.display = 'none';
+                    headingElement.classList.remove('selected');
+                }
             }
         }
         
@@ -794,28 +745,28 @@
         // إعادة تعيين كل شيء
         function resetSelections() {
             selectedHeadings = {};
+            currentHeading = null;
             
             // إعادة تعيين صناديق الإجابة
             for (let i = 1; i <= 5; i++) {
                 const answerBox = document.getElementById(`answerBox${i}`);
                 answerBox.classList.add('empty');
-                answerBox.innerHTML = `
-                    <div class="answer-label">Antwort hier ablegen</div>
-                    <div class="answer-placeholder">Klicken Sie auf eine Überschrift und wählen Sie diesen Text</div>
-                `;
+                answerBox.innerHTML = `<div class="answer-placeholder">Antwort hier ablegen</div>`;
+                answerBox.style.cursor = 'default';
+                answerBox.classList.remove('highlight');
             }
             
             // إعادة تعيين العناوين
             headings.forEach(heading => {
                 const headingElement = document.getElementById(`heading-${heading.letter}`);
-                headingElement.classList.remove('used');
+                headingElement.classList.remove('used', 'selected');
             });
+            
+            // إخفاء رسالة المعلومات
+            document.getElementById('selectedHeadingInfo').style.display = 'none';
             
             // إخفاء النتائج
             document.getElementById('feedbackContainer').style.display = 'none';
-            
-            // إغلاق أي نافذة اختيار مفتوحة
-            closeSelectionModal();
         }
     </script>
 </body>
